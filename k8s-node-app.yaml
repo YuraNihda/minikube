@@ -21,3 +21,17 @@ spec:
         image: "devopshint/node-app:latest"
         ports:
           - containerPort: 8080  # Change this to match your app
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nodejs-app
+  namespace: default
+spec:
+  selector:
+    app: nodejs-app
+  type: NodePort
+  ports:
+  - name: http
+    targetPort: 8080  # Change this to match the deployment
+    port: 80
